@@ -3,9 +3,9 @@ var cheerio =require('cheerio')
 var https =require('https')
 var topsites =require('./../common/common')
 
-exports.claw =function(arr){
+exports.claw =function(arr, callback){
   if (arr.length ===0){
-    console.log('node ./clawer.js [country] [amount]')
+    callback(false, '', 'node ./clawer.js [country] [amount]')
     return
   }
 
@@ -30,7 +30,7 @@ exports.claw =function(arr){
     })
 
     res.on('error', (e)=>{
-      console.log(e)
+      callback(false, '', e)
     })
     
     res.on('end', ()=>{
@@ -42,11 +42,11 @@ exports.claw =function(arr){
 
       //fetch top sites grouped by country code
       if (country_code_mapper.hasOwnProperty(country_name.toLowerCase())===false){
-        console.log('country '+country_name+' not found')
+        callback(false, '', 'country '+country_name+' not found')
         return
       }
 
-      topsites.claw('/topsites/'+country_code_mapper[country_name.toLowerCase()], amount)
+      topsites.claw('/topsites/'+country_code_mapper[country_name.toLowerCase()], amount, callback)
 
     })
   })
