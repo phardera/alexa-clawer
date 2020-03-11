@@ -3,6 +3,7 @@ var cheerio =require('cheerio')
 var https =require('https')
 
 exports.claw =function(url_path, min_list){
+
   var opts ={
     host:'www.alexa.com',
     port:'443',

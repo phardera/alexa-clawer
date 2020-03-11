@@ -1,7 +1,7 @@
 
 var cheerio =require('cheerio')
 var https =require('https')
-var topsites =require('./common')
+var topsites =require('./../common/common')
 
 exports.claw =function(arr){
   if (arr.length ===0){
